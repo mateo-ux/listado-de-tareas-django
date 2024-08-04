@@ -1,0 +1,48 @@
+{% extends "layout/base.html" %}
+
+{% block title %}Buscar{% endblock title %}
+
+{% block content %}
+    <div class="container mt-4">
+        <h1>Buscar Tareas</h1>
+        {% if resultados %}
+            <ul class="list-group">
+                <div class="container text-center">
+                    <div class="row">
+                {% for tarea in resultados %}
+                    <div class="col m-3">
+                        <div class="card" style="width: 18rem; ">
+                            <div class="card-body">
+                            <h5 class="card-title">Nombre de la tarea.</h5>
+                            <h6 class="card-subtitle mb-2 text-body-secondary">{{tarea.nombre}}</h6>
+                            <h5 class="card-title">Descripcion</h5>
+                            <p class="card-text">{{tarea.descripcion}}</p>
+                            <h5 class="card-title">Estado</h5>
+                            <h6 class="card-subtitle mb-2 text-body-secondary">{{tarea.estado}}</h6>
+                            <form action="{% url 'tarea_eliminar' tarea.id %}" method="post">
+                                <a href="{% url 'tarea_actualizar' tarea.id %}" class="btn btn-primary"> Actualizar</a>
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-danger">Eliminar</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>  
+                {% endfor %}
+            </div>
+        </div>
+          
+            </ul>
+        {% elif resultados is not None %}
+            <p>No se encontraron tareas que coincidan con tu búsqueda.</p>
+        {% endif %}
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
+{% endblock content %}
+
+
+    

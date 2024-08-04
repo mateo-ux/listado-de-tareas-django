@@ -1,0 +1,20 @@
+{% extends "layout/base.html" %}
+
+{% block title %}Crear tarea{% endblock title %}
+
+{% block content %}
+<div class="row">
+    <strong>{{error}}</strong>
+    <div class="col-md-6 offset-md-3">
+        <div class="card">
+            <div class="card-body">
+                <form action="{% url 'tarea_crear' %}" method = "post">
+                    {% csrf_token %}
+                    {{form}}
+                    <button type="submit" class="btn btn-ptimary">Enviar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
